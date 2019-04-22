@@ -1,14 +1,13 @@
 use strict;
 use warnings;
 use LWP::Simple;
+use HTML::TreeBuilder;
+use HTML::FormatText;
 
 $|=1;
 my $word;
 
-
-# my $URL = get("https://en.wikipedia.org/wiki/Formatting,");
 my $pdf = shift;
-# print ($pdf, "\n");
 my $output = `perl pdftotxt.pl $pdf`;
 
 sub main {
@@ -17,20 +16,52 @@ sub main {
   my $input = 'Input.txt';
   open(INPUT, $input) or die ("Input file $input not found.\n");
 
+  # my $check = 'Check.txt';
+  # open(CHECK, '>:encoding(UTF-8)', $check) or die ("Cannot create $check.\n");
+
 # Output file called Output.txt. This is where it will be written.
   my $output = 'Output.html';
-  open(OUTPUT, '>', $output) or die ("Cannot create $output.\n");
+  open(OUTPUT, '>:encoding(UTF-8)', $output) or die ("Cannot create $output.\n");
 
-  # my $check = 'Check.txt';
-  # open(CHECK, '>', $check) or die ("Cannot create $check.\n");
-#
-# while (<INPUT>) {
-#   my @entire_file = split(/(\b\s*\w*\s*\b)/, <INPUT>);
-#   if () {
-#     print OUTPUT "<a href=\"https://en.wikipedia.org/wiki/$1\"> $1 </a> \n";
-#   }
-#   print "size fo array:".@entire_file.".\n";
+
+
+
+# while (my $line = <INPUT>) {
+#     my $entire_file = split('\s', $line);
+#     print OUTPUT "<a href=\"https://en.wikipedia.org/wiki/$entire_file\"> $entire_file </a> \n";
+#     # print "size of array:".@entire_file.".\n";
+#     print OUTPUT "<a href=\"https://en.wikipedia.org/wiki/$entire_file\"> $entire_file </a> \n";
+#     # print $entire_file[0] . "\n";
 # }
+
+
+
+
+
+
+
+# my @lines;
+#
+# my $count = 0;
+#
+# while (my $line = <INPUT>) {
+#   chomp $line;
+#
+#   my @values = split /\s* \s*/, $line;
+#
+#   push @lines, \@values;
+#
+# }
+#
+# print $lines[0][1] . "\n";
+#
+# foreach my $line(@lines) {
+#   # print $line . "\n";
+# }
+
+
+
+
 
 
 
@@ -45,15 +76,32 @@ sub main {
 
 
 
-    while (<INPUT>)
-    {
-      # split each input line; words are separated by whitespace
-      for $word (split) {
-        # i'm just printing each "word" on a new line.
-        print OUTPUT "<a href=\"https://en.wikipedia.org/wiki/$word\"> $word </a> \n";
-        # print $word . "\n";
-    }
-  }
+# my @lines;
+#
+#     while (my $line = <INPUT>) {
+#       # chomp $line;
+#       # split each input line; words are separated by whitespace
+#       # for $word (split) {
+#       my @values = split (/\b/, $line);
+#       push @lines, \@values;
+#       # print OUTPUT "$_\n";
+#         # i'm just printing each "word" on a new line.
+#         print OUTPUT "<a href=\"https://en.wikipedia.org/wiki/$line\"> $line </a> \n";
+#     # }
+#   }
+
+  # my $URL = get("https://en.wikipedia.org/wiki/Virginia");
+  # my $Format = HTML::FormatText->new;
+  # my $TreeBuilder = HTML::TreeBuilder->new;
+  # $TreeBuilder->parse($URL);
+  # # if ($TreeBuilder->parse($URL)) {
+  # #   print "Rip";
+  # # } else {
+  # #   print "Yes";
+  # # }
+  # my $Parsed = $Format->format($TreeBuilder);
+  # print CHECK $Parsed;
+
 
 
   close(INPUT);
