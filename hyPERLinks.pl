@@ -5,17 +5,21 @@ $|=1;
 my $word;
 
 my $pdf = shift;
-my $output = `perl pdftotxt.pl $pdf`;
+my $pdfText = `perl getpdftext.pl $pdf`;
+my $txt = $1.'.txt' if($pdf =~ /([^.]+)/);
+my $html = $1.'.html' if($txt =~ /([^.]+)/);
+open (my $file, '>', $txt) or die ("Cannot create $txt.\n");
+print $file $pdfText;
+close $file;
+print ("done\n");
 
 sub main {
 
 # Input file called random.txt. It will read this file.
-  my $input = 'Input.txt';
-  open(INPUT, $input) or die ("Input file $input not found.\n");
+  open(INPUT, $txt) or die ("Input file $txt not found.\n");
 
 # Output file called Output.txt. This is where it will be written.
-  my $output = 'Output.html';
-  open(OUTPUT, '>:encoding(UTF-8)', $output) or die ("Cannot create $output.\n");
+  open(OUTPUT, '>:encoding(UTF-8)', $html) or die ("Cannot create $html.\n");
 
 
 my @lines;
