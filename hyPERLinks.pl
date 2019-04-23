@@ -28,13 +28,11 @@ sub main {
 
 # while (my $line = <INPUT>) {
 #     my $entire_file = split('\s', $line);
-#     print OUTPUT "<a href=\"https://en.wikipedia.org/wiki/$entire_file\"> $entire_file </a> \n";
+#     # print OUTPUT "<a href=\"https://en.wikipedia.org/wiki/$1\"> $1 </a> \n";
 #     # print "size of array:".@entire_file.".\n";
 #     print OUTPUT "<a href=\"https://en.wikipedia.org/wiki/$entire_file\"> $entire_file </a> \n";
 #     # print $entire_file[0] . "\n";
 # }
-
-
 
 
 
@@ -64,31 +62,46 @@ sub main {
 
 
 
+# while (my $line =<INPUT>) { # While the INPUT has a line.
+# # if($line =~ /(\b\w*\s\b)/) { # if there is the word "is" then run it.
+#   if($line =~ /([,])/) { # if there is the word "is" then run it.
+#   # $line =~ s/Barton/Mike/ig; #changes the name Barton to Mike.
+#   # print "Matched: '$1 \n'";
+#     print OUTPUT "<a href=\"https://en.wikipedia.org/wiki/$1\"> $1 </a> \n";
+#   }
+# }
 
-  # while (my $line = <INPUT>) { # While the INPUT has a line.
-  # # if($line =~ /(\b\w*\s\b)/) { # if there is the word "is" then run it.
-  #   if($line =~ /(\b\s*\w*\s*\b)/) { # if there is the word "is" then run it.
-  #   # $line =~ s/Barton/Mike/ig; #changes the name Barton to Mike.
-  #   # print "Matched: '$1 \n'";
-  #     print OUTPUT "<a href=\"https://en.wikipedia.org/wiki/$1\"> $1 </a> \n";
+
+# while (my $line = <INPUT>){
+#   print OUTPUT $line . "\n";
+#   if ($line =~ /()/)
+# }
+
+
+
+
+  #   while (<INPUT>) {
+  #     # split each input line; words are separated by whitespace
+  #     for $word (split) {
+  #       # print $word . "\n";
+  #       # i'm just printing each "word" on a new line.
+  #       print OUTPUT "<a href=\"https://en.wikipedia.org/wiki/$word\"> $word </a> \n";
   #   }
   # }
 
 
 
-# my @lines;
+
+# if (<INPUT> =~ /(\w+?\s+)/) {
+#   print "The shortest word is $1 \n";
+# }
+# if (<INPUT> =~ /(\w?\S+)/) {
+#   print "The Longest word is $1 \n";
+# }
 #
-#     while (my $line = <INPUT>) {
-#       # chomp $line;
-#       # split each input line; words are separated by whitespace
-#       # for $word (split) {
-#       my @values = split (/\b/, $line);
-#       push @lines, \@values;
-#       # print OUTPUT "$_\n";
-#         # i'm just printing each "word" on a new line.
-#         print OUTPUT "<a href=\"https://en.wikipedia.org/wiki/$line\"> $line </a> \n";
-#     # }
-#   }
+# print <INPUT>;
+
+
 
   # my $URL = get("https://en.wikipedia.org/wiki/Virginia");
   # my $Format = HTML::FormatText->new;
