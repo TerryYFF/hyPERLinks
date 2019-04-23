@@ -1,3 +1,5 @@
+#! /usr/bin/perl
+
 use strict;
 use warnings;
 
@@ -15,27 +17,24 @@ print ("done\n");
 
 sub main {
 
-# Input file called random.txt. It will read this file.
+  # Input file called random.txt. It will read this file.
   open(INPUT, $txt) or die ("Input file $txt not found.\n");
 
-# Output file called Output.txt. This is where it will be written.
+  # Output file called Output.txt. This is where it will be written.
   open(OUTPUT, '>:encoding(UTF-8)', $html) or die ("Cannot create $html.\n");
 
+  my @lines;
+  my $count = 0;
 
-my @lines;
-
-my $count = 0;
-
-while (my $line = <INPUT>) {
-  my @values = split /\s+/, $line;
-  foreach my $line(@values) {
-      print OUTPUT "<a href=\"https://en.wikipedia.org/wiki/$line\"> $line </a>";
-      # print OUTPUT $line . "\n";
+  while (my $line = <INPUT>) {
+    my @values = split /\s+/, $line;
+    foreach my $line(@values) {
+      my $temp = $line;
+      $temp =~ s/[[:punct:]]//g;
+      print OUTPUT "<a href=\"https://en.wikipedia.org/wiki/$temp\"> $line </a>";
     }
     print OUTPUT "<br>" . "\n";
-}
-
-
+  }
 
   close(INPUT);
   close(OUTPUT);
