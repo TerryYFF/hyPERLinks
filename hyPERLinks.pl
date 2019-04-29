@@ -13,7 +13,7 @@ my $pdfText;
 my $txt;
 my $html;
 
-if($pdf =~ /\b.pdf\b/i) {
+if($pdf =~ /\b.*[.]pdf\b/i) {
   $pdfText = `perl getpdftext.pl $pdf` or die ("Input file $pdf not found.\n");
   $txt = $1.'.txt' if($pdf =~ /([^.]+)/);
   $html = $1.'.html' if($txt =~ /([^.]+)/);
@@ -24,7 +24,7 @@ if($pdf =~ /\b.pdf\b/i) {
   print ("Completed converting $pdf to a $txt file.\n");
   sleep (1);
   print ("Now converting the $txt file to $html.\n");
-} elsif ($pdf =~ /\b.txt\b/i) {
+} elsif ($pdf =~ /\b.*[.]txt\b/i) {
   $txt = $pdf;
   $html = $1.'.html' if($txt =~ /([^.]+)/);
   print ("Starting to convert $pdf to HTML.\n");
@@ -56,7 +56,8 @@ sub main {
       $temp =~ s/[[:punct:]]//g;
       #Make sure only the word get the hyperlink.
       my $temp2 = $line;
-      $temp2 =~ s/\s+//g;
+      $temp2 =~ s/\w*//g;
+      #URL of the word
       my $URL = "https://en.wikipedia.org/wiki/$temp";
       #put $temp into $a
       $a = $temp;
@@ -67,7 +68,7 @@ sub main {
       } else {
         push @Check, $b;
         if (head($URL)) {
-          print OUTPUT "<a href=\"https://en.wikipedia.org/wiki/$temp\"> $temp2</a> \n";
+          print OUTPUT "<a href=\"https://en.wikipedia.org/wiki/$temp\"> $temp</a>$temp2 \n";
         } else {
           print OUTPUT "$line \n";
         }
@@ -75,6 +76,7 @@ sub main {
     }
     print OUTPUT "<br>" . "\n";
   }
+
 
   print ("Completed converting the $txt file to $html.\n");
   print ("Enjoy!\n");
